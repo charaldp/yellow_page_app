@@ -7,13 +7,9 @@ services:
       - "8000:8000"
     volumes:
       - .:/app/db
-  # vue:
-  #   image: node:20
-  #   working_dir: /var/www/html/app/
-  #   command: npm run dev
-  #   entrypoint: /bin/bash
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./vue/:/var/www/html/app
-  #   tty: true
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - web
