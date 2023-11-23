@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password --mysqlx=0
+    environment:
+      MYSQL_DATABASE: django_vue
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+  web:
+    build: .
+    command: python ./django_web_app/manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app/
+    depends_on:
+      - db
+  vue:
+    image: node:20
+    command: 
+      - npm run dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./vue:/app/
