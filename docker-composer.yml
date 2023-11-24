@@ -7,9 +7,15 @@ services:
       - "8000:8000"
     volumes:
       - .:/app/db
+      - ./static:/static
+      - ./templates:/templates
+    depends_on:
+      - frontend
   frontend:
     build: ./frontend
     ports:
       - "8080:8080"
-    depends_on:
-      - web
+    volumes:
+      - ./static:/static
+      - ./templates:/templates
+

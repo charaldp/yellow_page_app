@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% block html %}
+<html lang="en">
+<head>
+{% block head %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{% endblock %}</title>
+{% endblock %}
+</head>
+<body>
+  {% block body %}
+  <header>
+    <nav>
+      {% if user.is_authenticated %}
+        User: {{ user.username }}
+        <a href="{% url 'logout' %}">Log out</a>
+      {% else %}
+        <a href="{% url 'login' %}">Log In</a>
+        <a href="{% url 'signup' %}">Sign Up</a>
+        <a href="{% url 'contact_index' %}">See Contacts List</a>
+      {% endif %}
+    </nav>
+  <header>
+  {% block main %}{% endblock %}
+  {% endblock %}
+</body>
+</html>
+{% endblock %}

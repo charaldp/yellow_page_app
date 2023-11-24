@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'contacts_list',
+    'rest_framework',
+    'contact',
+    'corsheaders',
+    'webpack_loader'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            'contacts_list.templates'
+            os.path.join(BASE_DIR, '../templates'),
+            'contact.templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -70,6 +74,13 @@ TEMPLATES = [
         },
     },
 ]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8080',
+)
 
 LOGIN_REDIRECT_URL = "/"
 
@@ -132,6 +143,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / '../static',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

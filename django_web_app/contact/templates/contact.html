@@ -1,0 +1,15 @@
+<!-- templates/home.html -->
+{% extends "base_vue.html" %}
+
+{% block title %}Contacts List{% endblock %}
+
+{% block main %}
+{% if user.is_authenticated %}
+  User: {{ user.username }}
+  <a href="{% url 'logout' %}">Log out</a>
+{% else %}
+  <p>You are not logged in</p>
+  <p><a href="{% url 'login' %}">Log In</a> in order to edit the contact list.</p>
+{% endif %}
+<p>Double click on a contact to open it</p>
+{% endblock %}
